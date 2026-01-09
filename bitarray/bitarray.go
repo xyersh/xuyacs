@@ -1,17 +1,22 @@
 package bitarray
 
 type BitArrayI interface {
+	// Добавление бита по индексу
 	Set(idx int, val bool)
+
+	// Получение бита по индексу
 	Get(idx int) bool
 }
 
 type BitArray struct {
-	data []byte
-	size int
+	data []byte // биты храним здеся
+	size int    // размер массива
 }
 
+// Получаение нового биторого массива
 func NewBitArray(bitIdx int) *BitArray {
 	return &BitArray{
+		//в качестве длины слайса используется итоговое количество байт с учетом округления вверх
 		data: make([]byte, (bitIdx+7)/8),
 		size: bitIdx,
 	}
