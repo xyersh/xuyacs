@@ -34,6 +34,21 @@ func (e *Element[T]) Prev() *Element[T] {
 	return nil
 }
 
+type ListI[T any] interface {
+	Init() *List[T]
+	Len() int
+	Front() *Element[T]
+	Back() *Element[T]
+	PushFront(v T) *Element[T]
+	PushBack(v T) *Element[T]
+	Remove(e *Element[T]) T
+
+	MoveToFront(e *Element[T])
+	MoveToBack(e *Element[T])
+	All() iter.Seq[T]
+	String() string
+}
+
 // List представляет собой двухсвязный список.
 // Нулевое значение List — это пустой список, готовый к использованию.
 type List[T any] struct {
@@ -47,6 +62,13 @@ func (l *List[T]) Init() *List[T] {
 	l.root.prev = &l.root
 	l.len = 0
 	return l
+}
+
+// lazyInit лениво инициализирует список, если он не был инициализирован.
+func (l *List[T]) lazyInit() {
+	if l.root.next == nil {
+		l.Init()
+	}
 }
 
 // New создает новый экземпляр списка.
@@ -71,13 +93,6 @@ func (l *List[T]) Back() *Element[T] {
 		return nil
 	}
 	return l.root.prev
-}
-
-// lazyInit лениво инициализирует список, если он не был инициализирован.
-func (l *List[T]) lazyInit() {
-	if l.root.next == nil {
-		l.Init()
-	}
 }
 
 // insert вставляет элемент e после at.
