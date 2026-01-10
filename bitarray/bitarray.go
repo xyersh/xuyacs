@@ -10,20 +10,20 @@ type BitArrayI interface {
 
 type BitArray struct {
 	data []byte // биты храним здеся
-	size int    // размер массива
+	size uint   // размер массива
 }
 
 // Получаение нового биторого массива
-func NewBitArray(bitIdx int) *BitArray {
+func NewBitArray(bitCnt uint) *BitArray {
 	return &BitArray{
 		//в качестве длины слайса используется итоговое количество байт с учетом округления вверх
-		data: make([]byte, (bitIdx+7)/8),
-		size: bitIdx,
+		data: make([]byte, (bitCnt+7)/8),
+		size: bitCnt,
 	}
 }
 
-func (b *BitArray) Set(bitIdx int, val bool) {
-	if bitIdx < 0 || bitIdx >= b.size {
+func (b *BitArray) Set(bitIdx uint, val bool) {
+	if bitIdx >= b.size {
 		panic("index out of range")
 	}
 
@@ -39,8 +39,8 @@ func (b *BitArray) Set(bitIdx int, val bool) {
 	}
 }
 
-func (b *BitArray) Get(bitIdx int) bool {
-	if bitIdx < 0 || bitIdx >= b.size {
+func (b *BitArray) Get(bitIdx uint) bool {
+	if bitIdx >= b.size {
 		panic("index out of range")
 	}
 
