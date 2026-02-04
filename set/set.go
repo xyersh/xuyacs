@@ -43,3 +43,37 @@ func (s *Set[T]) Elements() []T {
 	}
 	return result
 }
+
+// Union returns a new set containing all elements from both sets
+func Union[T comparable](s1, s2 *Set[T]) *Set[T] {
+	result := New[T]()
+	for key, _ := range s1.values {
+		result.Add(key)
+	}
+	for key, _ := range s2.values {
+		result.Add(key)
+	}
+	return result
+}
+
+// Intersection returns a new set containing only elements that exist in both sets
+func Intersect[T comparable](s1, s2 *Set[T]) *Set[T] {
+	result := New[T]()
+	for key, _ := range s1.values {
+		if s2.Contains(key) {
+			result.Add(key)
+		}
+	}
+	return result
+}
+
+// Difference returns a new set with elements in s1 that are not in s2
+func Diff[T comparable](s1, s2 *Set[T]) *Set[T] {
+	result := New[T]()
+	for key, _ := range s1.values {
+		if !s2.Contains(key) {
+			result.Add(key)
+		}
+	}
+	return result
+}
