@@ -18,7 +18,7 @@ type Queue[T any] struct {
 }
 
 // NewQueue creates a new empty queue
-func NewQueue[T any]() *Queue[T] {
+func New[T any]() *Queue[T] {
 
 	return &Queue[T]{
 		head: nil,

@@ -11,7 +11,7 @@ type Stack[T any] struct {
 }
 
 // NewStack creates a new empty stack
-func NewStack[T any]() *Stack[T] {
+func New[T any]() *Stack[T] {
 	return &Stack[T]{
 		array: make([]T, 0),
 	}
