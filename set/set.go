@@ -38,7 +38,7 @@ func (s *Set[T]) Size() int {
 // Elements returns a slice containing all elements in the set
 func (s *Set[T]) Elements() []T {
 	result := make([]T, 0, len(s.values))
-	for key, _ := range s.values {
+	for key := range s.values {
 		result = append(result, key)
 	}
 	return result
@@ -47,10 +47,10 @@ func (s *Set[T]) Elements() []T {
 // Union returns a new set containing all elements from both sets
 func Union[T comparable](s1, s2 *Set[T]) *Set[T] {
 	result := New[T]()
-	for key, _ := range s1.values {
+	for key := range s1.values {
 		result.Add(key)
 	}
-	for key, _ := range s2.values {
+	for key := range s2.values {
 		result.Add(key)
 	}
 	return result
@@ -59,7 +59,7 @@ func Union[T comparable](s1, s2 *Set[T]) *Set[T] {
 // Intersection returns a new set containing only elements that exist in both sets
 func Intersect[T comparable](s1, s2 *Set[T]) *Set[T] {
 	result := New[T]()
-	for key, _ := range s1.values {
+	for key := range s1.values {
 		if s2.Contains(key) {
 			result.Add(key)
 		}
@@ -70,7 +70,7 @@ func Intersect[T comparable](s1, s2 *Set[T]) *Set[T] {
 // Difference returns a new set with elements in s1 that are not in s2
 func Diff[T comparable](s1, s2 *Set[T]) *Set[T] {
 	result := New[T]()
-	for key, _ := range s1.values {
+	for key := range s1.values {
 		if !s2.Contains(key) {
 			result.Add(key)
 		}

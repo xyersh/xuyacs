@@ -1,0 +1,46 @@
+version: "2"
+run:
+  timeout: 5m
+  go: '1.21'
+  tests: true
+
+
+linters:
+  exclusions:
+    paths:
+      - "internal/mocks/.*"
+      - test\.go
+    rules:
+      - path: _test\.go
+        linters:
+          - errcheck
+          - gocyclo
+
+  default: none
+  enable:
+    # Базовые
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    # Стиль
+
+    - revive
+    - misspell
+    - whitespace
+    # Сложность
+    - gocyclo
+    - funlen
+    # Безопасность
+    - gosec
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

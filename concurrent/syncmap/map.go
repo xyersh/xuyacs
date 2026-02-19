@@ -37,8 +37,7 @@ func (sm *SyncMap[K, V]) fnv32(key K) uint32 {
 
 	// Получаем указатель на данные ключа и представляем их как срез байтов
 	// Внимание: это работает для простых типов и структур без указателей внутри
-	var data []byte
-	data = unsafe.Slice((*byte)(unsafe.Pointer(&key)), size)
+	data := unsafe.Slice((*byte)(unsafe.Pointer(&key)), size)
 
 	hash := uint32(2166136261)
 	const prime32 = 16777619

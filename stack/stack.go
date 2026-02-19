@@ -55,8 +55,5 @@ func (s *Stack[T]) Size() int {
 
 // IsEmpty returns true if the stack contains no elements
 func (s *Stack[T]) IsEmpty() bool {
-	if len(s.array) == 0 {
-		return true
-	}
-	return false
+	return len(s.array) == 0
 }
